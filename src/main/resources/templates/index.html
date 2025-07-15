@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Сжатие изображения</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        form {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        input[type="file"] {
+            width: 100%;
+            margin-bottom: 25px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background: white;
+        }
+
+        .slider-container {
+            margin-bottom: 25px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            background: #ddd;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #3498db;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .quality-value {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<h1>Сжатие изображения</h1>
+
+<form method="post" enctype="multipart/form-data" action="/compress">
+    <input type="file" name="file" accept="image/png, image/jpeg" required>
+
+    <div class="slider-container">
+        <div class="slider-label">
+            <span>Качество: <span id="qualityValue" class="quality-value">0.7</span></span>
+            <span>0.1 - 1.0</span>
+        </div>
+        <input type="range" id="qualitySlider" name="quality"
+               min="0.1" max="1.0" step="0.1" value="0.7">
+    </div>
+
+    <button type="submit">Сжать и скачать</button>
+</form>
+
+<script>
+    const slider = document.getElementById('qualitySlider');
+    const qualityValue = document.getElementById('qualityValue');
+
+    slider.addEventListener('input', function() {
+        qualityValue.textContent = this.value;
+    });
+</script>
+</body>
+</html>
