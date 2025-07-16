@@ -24,6 +24,3 @@ Demo Spring Boot Application
    mvn spring-boot:run
 4. Приложение будет доступно по адресу: http://localhost:8080
 
-Контакты:
----------
-Автор: [Ваше имя] 
